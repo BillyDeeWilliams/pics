@@ -1,12 +1,14 @@
 import React from 'react';
 //import axios from 'axios';
 import SearchBar from './Searchbar.js'
-import unsplash from "../api/unsplash.js"
-
+import unsplash from '../api/unsplash.js'
+import Imagelist from './Imagelist.js'
+import '../styles/styles.css';
 class App extends React.Component {
 
     state = {
             images: [],
+            imageURLS: [],
             currRequestStatus: {}
     };
      onSearchSUbmit = async (sq) => {
@@ -16,14 +18,14 @@ class App extends React.Component {
         });
 
         this.setState({images: response.data.results});
-
+        console.log(this.state.images)
     }
 
     render(){
         return(
             <div classNmae="ui continer" style={{marginTop:`10px`}}>
                 <SearchBar onSubmit={this.onSearchSUbmit} />
-                Found: {this.state.images.length} images
+                <Imagelist images={this.state.images} />
             </div>
         );
     }
